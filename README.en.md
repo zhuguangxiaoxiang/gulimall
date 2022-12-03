@@ -1,4 +1,4 @@
-# gulimail
+# gulimall
 
 #### Description
 谷粒商城

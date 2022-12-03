@@ -19,3 +19,6 @@ buildNumber.properties
 .idea
 
 **/.gitignore
+
+rebel.xml
+.rebel.xml.bak
