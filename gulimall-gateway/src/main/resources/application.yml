@@ -20,6 +20,13 @@ spring:
           predicates:
             - Query=url,qq
 
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
         - id: admin_route
           uri: lb://renrenfast
           predicates:
@@ -29,3 +36,5 @@ spring:
 #前端项目 ,/api
 
 ## http://localhost:88/api/captcha.jpg http://localhost:8080/renren-fast/captcha.jpg
+
+## http://localhost:88/api/product/category/list/tree   http://localhost:15000/product/category/list/tree
