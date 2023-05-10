@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.common.utils.R;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,8 +36,9 @@ public class OssController {
 
     @Value("${spring.cloud.alicloud.access-key}")
     private String accessId;
+
     @RequestMapping("/oss/policy")
-    public Map<String, String> policy() {
+    public R policy() {
         // 填写Bucket名称，例如examplebucket。
         // 填写Host地址，格式为https://bucketname.endpoint。
         // https://gulimall-2870.oss-cn-beijing.aliyuncs.com/1600882817ea3G.jpg
@@ -62,7 +64,7 @@ public class OssController {
             String postSignature = ossClient.calculatePostSignature(postPolicy);
 
             respMap = new LinkedHashMap<String, String>();
-            respMap.put("accessid", accessId);
+            respMap.put("accessId", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
             respMap.put("dir", dir);
@@ -74,6 +76,6 @@ public class OssController {
             // Assert.fail(e.getMessage());
             System.out.println(e.getMessage());
         }
-        return respMap;
+        return R.ok().put("data", respMap);
     }
 }
