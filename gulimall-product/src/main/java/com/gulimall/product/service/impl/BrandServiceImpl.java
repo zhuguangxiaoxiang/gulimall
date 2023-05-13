@@ -1,7 +1,6 @@
 package com.gulimall.product.service.impl;
 
 import com.gulimall.product.service.CategoryBrandRelationService;
-import com.gulimall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +49,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
         if (!StringUtils.isEmpty(brand.getName())){
             //同步更新其他关联表中的数据
             categoryBrandRelationService.updateBrand(brand.getBrandId(),brand.getName());
-
             //TODO 更新其他关联
         }
     }
